@@ -1,0 +1,42 @@
+var dataValue;
+
+// JSONデータ読み込み
+function readJSON()
+{
+	var req = new XMLHttpRequest();
+	req.open("GET", "./data.json");
+	req.send();
+
+	req.onreadystatechange = function()
+		{
+			if(req.readyState == 4 && req.status == 200)
+			{
+				dataValue = JSON.parse(req.responseText);
+				writeChart();
+			}
+		};
+}
+
+function writeChart()
+{
+	// グラフに表示するJSONデータを作成する
+	// 横軸の値
+	//var datasetsValue = new Object();
+	//datasetsValue.label = colTitle;
+	//datasetsValue.data = data;
+
+	// 横軸のラベル
+	//var dataValue = new Object();
+	//dataValue.labels = labels;
+	//dataValue.datasets = [];
+	//dataValue.datasets.push(datasetsValue);
+	//dataValue.options = {};
+
+	var charValue = new Object();
+	//charValue.type = "line";
+	//charValue.data = dataValue;
+
+	var ctx = document.getElementById("myLineChart");
+	//var myLineChart = new Chart(ctx, charValue);
+	var myLineChart = new Chart(ctx, dataValue);
+}
